@@ -46,7 +46,6 @@ int main(int argc, char** argv)
 	// Run a program for each type of hashing algorithm hash algorithm
 	for(int hashAlgNum = 0; hashAlgNum < HASH_PROG_ARRAY_SIZE; ++hashAlgNum)
 	{
-
 		// Create two pipes
 		if(pipe(parentToChildPipe) < 0)
 		{
@@ -108,7 +107,6 @@ int main(int argc, char** argv)
 		// Reset the hash buffer
 		memset(hashValue, (char)NULL, HASH_VALUE_LENGTH);
 
-
 		// Send the file name to child
 		if(write(parentToChildPipe[WRITE_END], fileName_array, sizeof(fileName_array)) < 0)
 		{
@@ -126,7 +124,6 @@ int main(int argc, char** argv)
 		// Print the hash value
 		fprintf(stdout, "%s HASH VALUE: %s\n", hashProgs[hashAlgNum].c_str(), hashValue);
 		fflush(stdout);
-
 
 		// Wait for the program to terminate
 		if(wait(NULL) < 0)
@@ -146,8 +143,6 @@ int main(int argc, char** argv)
 // ----------------------------------------------------------------------------
 void computeHash(const string& hashProgName)
 {
-
-
 	char hashValue[HASH_VALUE_LENGTH];			// Hash value buffer
 	char fileNameRecv[MAX_FILE_NAME_LENGTH];	// The received file name
 
@@ -171,7 +166,7 @@ void computeHash(const string& hashProgName)
 	char cmdLine_array[n + 1];
 	strcpy(cmdLine_array, cmdLine.c_str());
 
-    // Open the pipe to the program (specified in cmdLine)
+	// Open the pipe to the program (specified in cmdLine)
 	FILE* progOutput = popen(cmdLine_array, "r");
 
 	// Reset the value buffer
